@@ -1,5 +1,12 @@
 import React from 'react';
-import {Text, SafeAreaView, StyleSheet, FlatList} from 'react-native';
+import {
+  Text,
+  View,
+  SafeAreaView,
+  StyleSheet,
+  FlatList,
+  Image,
+} from 'react-native';
 
 const DATA = [
   {
@@ -45,12 +52,33 @@ const DATA = [
     ],
   },
 ];
-
+const Item = props => {
+  const {dt_txt, min, max, condition} = props;
+  return (
+    <View>
+      <Image
+        source={require('../../assets/images/sunny.gif')}
+        style={styles.icon}
+      />
+      <Text>{dt_txt}</Text>
+      <Text>{min}</Text>
+      <Text>{max}</Text>
+    </View>
+  );
+};
 const UpcomingWeather = () => {
+  const renderItem = ({item}) => (
+    <Item
+      dt_txt={item.dt_txt}
+      min={item.main.temp_min}
+      max={item.main.temp_max}
+      condition={item.weather[0].main}
+    />
+  );
   return (
     <SafeAreaView style={styles.container}>
       <Text>Upcoming Weather</Text>
-      <FlatList data={DATA} renderItem={({item}) => <Text>{item.key}</Text>} />
+      <FlatList data={DATA} renderItem={renderItem} />
     </SafeAreaView>
   );
 };
@@ -59,6 +87,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'green',
+  },
+  icon: {
+    height: 60,
+    width: 60,
   },
 });
 
