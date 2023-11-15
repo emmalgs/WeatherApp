@@ -1,10 +1,14 @@
 import React from 'react';
-import {Text, View, SafeAreaView, StyleSheet} from 'react-native';
+import {Text, View, SafeAreaView, StyleSheet, Image} from 'react-native';
 
 const App = () => {
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.container}>
+        <Image
+          source={require('./assets/images/sunny.gif')}
+          style={styles.icons}
+        />
         <Text>What's the weather today</Text>
         <Text style={styles.temp}>6</Text>
         <View style={styles.highLowWrapper}>
@@ -28,6 +32,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   temp: {
     color: 'black',
@@ -54,7 +59,11 @@ const styles = StyleSheet.create({
   },
   message: {
     fontSize: 30,
-  }
+  },
+  icons: {
+    width: 100,
+    height: 100,
+  },
 });
 
 export default App;
